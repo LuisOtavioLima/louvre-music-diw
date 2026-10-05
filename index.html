@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Louvre Music</title>
+
+    <link
+        rel="stylesheet" href="assets/css/style.css">    
+    >
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+    <header class = "cabecalho">
+        <div class = "marca">
+
+            <!--href + a = vai pra lá-->
+            <a href = "#index.html"><h1>Louvre</h1></a>
+            
+        </div>
+
+        <div>
+
+            <span class="material-symbols-outlined">
+                search
+            </span>
+
+            <label for="busca"></label>
+            <input type="text" id="busca" name="busca" placeholder="Hoje é dia de?">
+
+        </div>
+
+        <div>
+            <a href = "perfil.html" <span class="material-symbols-outlined">
+                account_circle
+            </span></a>
+        </div>
+    </header>
+
+    <main class = "conteudo">
+
+        <aside class = "biblioteca">
+
+            <div class = "cabecalho-biblioteca">
+
+                <h2>Biblioteca</h2>
+
+                <span class="material-symbols-outlined">
+                search
+                </span>
+
+                <label for="busca"></label>
+                <input type="text" id="busca" name="busca" placeholder="Buscar em sua biblioteca">
+
+                <span class="material-symbols-outlined">
+                    add_2
+                </span>
+            </div>
+
+            <!-- Lista de Álbuns na Biblioteca -->
+            <ul class="lista-biblioteca">
+
+                <!-- Son of Spergy -->
+                <li>
+                    <img src="assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy" width="48">
+                    <div class="info-item">
+                        <p class="titulo">Son Of Spergy</p>
+                        <p class="detalhes">
+                            Álbum • Daniel Caesar
+                        </p>
+                    </div>
+                </li>
+
+                <!-- Um -->
+                <li>
+                    <img src="assets/img/capa-um.jpg" alt="Capa Um" width="48">
+                    <div class="info-item">
+                        <p class="titulo">Um</p>
+                        <p class="detalhes">Álbum • Luccas Carlos</p>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- LADO DIREITO: SUGESTÕES DO LOUVRE -->
+        <section class="sugestoes-louvre">
+            <h2>Home</h2>
+            
+            <div class="grid-cards">
+                <!-- Card Son of Spergy-->
+                <article class="card-album">
+                    <!-- O href aqui direciona para a nova página do álbum -->
+                    <a href="son-of-spergy.html">
+                        <img src="assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy">
+                        <h3>Son Of Spergy</h3>
+                        <p>Daniel Caesar</p>
+                    </a>
+                </article>
+
+                <!-- Card Um -->
+                <article class="card-album">
+                    <a href="#">
+                        <img src="assets/img/capa-um.jpg" alt="Capa Um">
+                        <h3>Um</h3>
+                        <p>Luccas Carlos</p>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        
+        <article class= "tocando-agora">
+            <img src="assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy" width="48">
+                    <div class="info-item">
+                        <p class="titulo">Son Of Spergy</p>
+                        <p class="detalhes">
+                            Álbum • Daniel Caesar
+                        </p>
+                    </div>
+        </article>
+
+        <div class = "player">
+            
+            <span class="material-symbols-outlined">
+                skip_previous
+            </span>
+
+            <span class="material-symbols-outlined">
+                play_circle
+            </span>
+
+            <span class="material-symbols-outlined">
+                skip_next
+            </span>
+        </div>
+
+        <div class = "controles">
+
+            <span class="material-symbols-outlined">
+                menu
+            </span>
+
+
+            <span class="material-symbols-outlined">
+                volume_up
+            </span>
+
+            <label for="volume"></label>
+            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+</body>
+</html>
