@@ -1,3 +1,3 @@
 ### Louvre Music
 
-![Wireframe][../assets/img/wireframe.png]
+![Wireframe](../assets/img/wireframe.png)
