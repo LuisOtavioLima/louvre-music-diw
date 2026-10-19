@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerir Biblioteca | Louvre Music</title>
+    <link rel="stylesheet" href="../assets/css/style.css">    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="marca">
+            <a href="../index.html"><h1>Louvre</h1></a>
+        </div>
+        <div class="menu-perfil">
+            <a href="perfil.html" title="Meu Perfil"><span class="material-symbols-outlined">account_circle</span></a>
+        </div>
+    </header>
+
+    <div class="container-principal layout-centralizado">
+        <main class="area-cadastro">
+            <h2>Gerenciar Álbuns</h2>
+            
+            <section class="painel-formularios">
+                <!-- Formulário de Criação exigido pelo professor -->
+                <form action="#" method="POST" class="form-cadastro">
+                    <h3>Cadastrar Novo Álbum</h3>
+                    
+                    <div class="grupo-input">
+                        <label for="nome-album">Título do Álbum</label>
+                        <input type="text" id="nome-album" name="nome-album" required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="artista-album">Artista</label>
+                        <input type="text" id="artista-album" name="artista-album" required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="ano-album">Ano de Lançamento</label>
+                        <input type="number" id="ano-album" name="ano-album" min="1900" max="2026">
+                    </div>
+
+                    <div class="grupo-acoes-form">
+                        <button type="reset" class="btn-secundario">Limpar</button>
+                        <button type="submit" class="btn-primario">Salvar Álbum</button>
+                    </div>
+                </form>
+
+                <!-- Área de Listagem/Edição para cumprir requisito -->
+                <div class="area-edicao">
+                    <h3>Álbuns Cadastrados (Editar/Excluir)</h3>
+                    <div class="controles-filtro">
+                        <button class="btn-secundario"><span class="material-symbols-outlined">filter_list</span> Filtrar</button>
+                        <button class="btn-secundario"><span class="material-symbols-outlined">sort</span> Ordenar</button>
+                    </div>
+                    
+                    <ul class="lista-gerenciamento">
+                        <li>
+                            <span>Son Of Spergy - Daniel Caesar</span>
+                            <div class="acoes">
+                                <button class="btn-icone" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+                                <button class="btn-icone perigo" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="rodape">
+        <p style="text-align: center; width: 100%; color: #b3b3b3;">Louvre Music - Painel de Administração</p>
+    </footer>
+</body>
+</html>
