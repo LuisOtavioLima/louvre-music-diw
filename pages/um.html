@@ -21,76 +21,11 @@
 </head>
 
 <body>
-    <header class = "cabecalho">
-        <div class = "marca">
-
-            <!--href + a = vai pra lá-->
-            <a href = "index.html"><h1>Louvre</h1></a>
-            
-        </div>
-
-        <div class="barra-busca">
-
-            <span class="material-symbols-outlined">
-                search
-            </span>
-
-            <label for="busca-principal" class="sr-only">Busca Principal</label>
-            <input type="text" id="busca-principal" name="busca" placeholder="Hoje é dia de?">
-
-        </div>
-
-        <div class="menu-perfil">
-            <a href="../pages/perfil.html" title="Meu Perfil">
-                <span class="material-symbols-outlined">account_circle</span>
-            </a>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <div class = "conteiner-principal">
 
-        <aside class = "biblioteca">
-
-            <div class = "cabecalho-biblioteca">
-
-                <h2>Biblioteca</h2>
-
-                <!-- ícones que eram ações agora são botões/links -->
-                <div class="acoes-biblio">
-                    <a href="../pages/cadastro.html" title="Adicionar Álbum"><span class="material-symbols-outlined">add</span></a>
-                </div>
-            </div>
-            
-            <div class="busca-biblio-container">
-                <span class="material-symbols-outlined">search</span>
-                <label for="busca-biblioteca" class="sr-only">Buscar na biblioteca</label>
-                <input type="text" id="busca-biblioteca" name="busca-biblioteca" placeholder="Buscar em sua biblioteca">
-            </div>
-
-            <!-- Lista de Álbuns na Biblioteca -->
-            <ul class="lista-biblioteca">
-
-                <!-- Son of Spergy -->
-                <li>
-                    <img src="../assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy" width="48">
-                    <div class="info-item">
-                        <p class="titulo">Son Of Spergy</p>
-                        <p class="detalhes">
-                            Álbum • Daniel Caesar
-                        </p>
-                    </div>
-                </li>
-
-                <!-- Um -->
-                <li>
-                    <img src="../assets/img/capa-um.jpg" alt="Capa Um" width="48">
-                    <div class="info-item">
-                        <p class="titulo">Um</p>
-                        <p class="detalhes">Álbum • Luccas Carlos</p>
-                    </div>
-                </li>
-            </ul>
-        </aside>
+        <div id="sidebar-placeholder"></div>
 
         <!-- Detalhes -->
         <main class="detalhes-album">
@@ -196,28 +131,6 @@
             </table>
         </main>
     </div>
-
-    <footer class="rodape">
-        <article class="tocando-agora">
-            <img src="../assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy">
-            <div class="info-item">
-                <p class="titulo">Son Of Spergy</p>
-                <p class="detalhes">Álbum • Daniel Caesar</p>
-            </div>
-        </article>
-
-        <div class="player">
-            <span class="material-symbols-outlined">skip_previous</span>
-            <span class="material-symbols-outlined play-btn">play_circle</span>
-            <span class="material-symbols-outlined">skip_next</span>
-        </div>
-
-        <div class="controles">
-            <span class="material-symbols-outlined">menu</span>
-            <span class="material-symbols-outlined">volume_up</span>
-            <label for="volume" class="sr-only">Volume</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-        </div>
-    </footer>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>

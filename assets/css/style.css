@@ -420,3 +420,36 @@ a:hover {
     }
 }
 
+/* Transição suave para o movimento */
+.biblioteca {
+    transition: width 0.3s ease;
+    width: 350px; /* Largura padrão definida na etapa 2 */
+}
+
+/* O estado quando a classe é ativada pelo JS */
+.biblioteca.recolhida {
+    width: 80px; 
+    align-items: center; /* Centraliza os ícones */
+}
+
+/* Esconde textos, barra de busca e títulos quando estiver recolhida */
+.biblioteca.recolhida h2,
+.biblioteca.recolhida .busca-biblio-container,
+.biblioteca.recolhida .info-item,
+.biblioteca.recolhida .acoes-biblio {
+    display: none;
+}
+
+/* Ajusta as imagens da lista para ficarem centralizadas */
+.biblioteca.recolhida .lista-biblioteca li {
+    padding: 8px 0;
+    justify-content: center;
+}
+
+/* Faz as divs de placeholder "desaparecerem" estruturalmente para o Grid e Flexbox funcionarem */
+#header-placeholder, 
+#sidebar-placeholder, 
+#footer-placeholder {
+    display: contents;
+}
+
