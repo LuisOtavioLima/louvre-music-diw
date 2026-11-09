@@ -24,7 +24,7 @@ body {
     
     /* CUMPRE O REQUISITO: CSS GRID NO LAYOUT PRINCIPAL */
     display: grid;
-    grid-template-rows: 70px 1fr 90px; /* Header | Meio | Footer */
+    grid-template-rows: 70px minmax(0, 1fr) 90px; /* Header | Meio | Footer (minmax(0) deixa o meio rolar por dentro) */
 }
 
 /* Ocultar visualmente labels por acessibilidade */
@@ -136,7 +136,7 @@ a:hover {
    ======================================================== */
 .container-principal {
     display: flex;
-    height: 100%;
+    min-height: 0;      /* permite que o miolo encolha e role por dentro */
     overflow: hidden;
 }
 
@@ -144,6 +144,7 @@ a:hover {
 .biblioteca {
     background-color: var(--bg-biblioteca);
     width: 350px;
+    align-self: stretch; /* ocupa toda a altura do miolo */
     padding: 16px;
     display: flex;
     flex-direction: column;
