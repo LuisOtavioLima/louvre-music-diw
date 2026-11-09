@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Perfil | Louvre Music</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="container-principal">
+
+        <div id="sidebar-placeholder"></div>
+
+        <main class="pagina-perfil">
+            <header class="cabecalho-perfil">
+                <div class="avatar" id="avatar-perfil" aria-hidden="true">U</div>
+                <div>
+                    <p class="tipo">Perfil</p>
+                    <h2 id="nome-perfil">Usuário Louvre</h2>
+                    <p class="info-album" id="bio-perfil"></p>
+                </div>
+            </header>
+
+            <!-- Números calculados a partir dos álbuns salvos -->
+            <section class="estatisticas" aria-label="Estatísticas da biblioteca">
+                <div class="estatistica"><strong id="est-albuns">0</strong><span>álbuns</span></div>
+                <div class="estatistica"><strong id="est-faixas">0</strong><span>faixas</span></div>
+                <div class="estatistica"><strong id="est-favoritos">0</strong><span>favoritos</span></div>
+                <div class="estatistica"><strong id="est-tempo">0 min</strong><span>de música</span></div>
+            </section>
+
+            <div class="grade-perfil">
+                <section>
+                    <h3>Editar perfil</h3>
+                    <form id="form-perfil" class="form-cadastro" novalidate>
+                        <div class="grupo-input">
+                            <label for="perfil-nome">Nome</label>
+                            <input type="text" id="perfil-nome" name="nome" maxlength="40" autocomplete="off">
+                            <small class="erro-campo" id="erro-nome"></small>
+                        </div>
+
+                        <div class="grupo-input">
+                            <label for="perfil-email">E-mail (opcional)</label>
+                            <input type="text" id="perfil-email" name="email" maxlength="80" autocomplete="off">
+                            <small class="erro-campo" id="erro-email"></small>
+                        </div>
+
+                        <div class="grupo-input">
+                            <label for="perfil-bio">Sobre você (opcional)</label>
+                            <textarea id="perfil-bio" name="bio" rows="3" maxlength="160"></textarea>
+                            <small class="erro-campo" id="erro-bio"></small>
+                        </div>
+
+                        <div class="grupo-acoes-form">
+                            <button type="submit" class="btn-primario">Salvar perfil</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section>
+                    <h3>Tocadas recentemente</h3>
+                    <ol class="lista-historico" id="lista-historico"></ol>
+                </section>
+            </div>
+
+            <section class="secao-perfil">
+                <h3>Álbuns favoritos</h3>
+                <div class="grid-cards" id="grid-favoritos"></div>
+            </section>
+
+            <section class="secao-perfil zona-dados">
+                <h3>Dados do sistema</h3>
+                <p class="dica-campo">Tudo fica salvo neste navegador (localStorage). Restaurar apaga seus cadastros, o histórico e a fila, e volta aos álbuns iniciais.</p>
+                <button type="button" class="btn-secundario perigo" id="btn-restaurar">Restaurar dados iniciais</button>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../assets/js/dados.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/player.js"></script>
+    <script src="../assets/js/busca.js"></script>
+    <script src="../assets/js/perfil.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
