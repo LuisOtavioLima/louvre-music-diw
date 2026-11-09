@@ -1,0 +1,4 @@
+# Normaliza quebras de linha: o repositório guarda sempre LF, independente do SO
+* text=auto eol=lf
+*.png binary
+*.jpg binary
