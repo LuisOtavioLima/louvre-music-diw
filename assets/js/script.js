@@ -77,6 +77,7 @@ async function iniciarLayout() {
 
     iniciarSidebar();
     iniciarBiblioteca();
+    iniciarBuscaGlobal();
     iniciarPlayer();
 
     // Aviso deixado por outra página antes de redirecionar (ex.: álbum excluído)
