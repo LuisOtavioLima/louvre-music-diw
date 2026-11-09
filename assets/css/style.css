@@ -475,3 +475,63 @@ body[data-layout="sem-sidebar"] .btn-menu,
 body[data-layout="sem-sidebar"] .barra-busca {
     display: none;
 }
+
+/* ========================================================
+   ETAPA 3 — elementos dinâmicos
+   ======================================================== */
+
+.vazio {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    padding: 8px;
+}
+
+.vazio a {
+    color: var(--cor-destaque);
+    text-decoration: underline;
+}
+
+/* Itens da biblioteca agora são links */
+.lista-biblioteca li {
+    padding: 0;
+}
+
+.lista-biblioteca li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.lista-biblioteca li a:hover,
+.lista-biblioteca li a.ativo {
+    background-color: #282828;
+    color: inherit;
+}
+
+.lista-biblioteca li a.ativo .titulo {
+    color: var(--cor-destaque);
+}
+
+.lista-biblioteca li.vazio:hover {
+    background: none;
+}
+
+.biblioteca.recolhida .lista-biblioteca li a {
+    padding: 8px 0;
+    justify-content: center;
+}
+
+/* Cards: o link ocupa o card todo */
+.card-album a {
+    display: block;
+}
+
+.card-album a:hover {
+    color: inherit;
+}
+
+.sugestoes-louvre .vazio {
+    grid-column: 1 / -1;
+}

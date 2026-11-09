@@ -76,6 +76,7 @@ async function iniciarLayout() {
     ]);
 
     iniciarSidebar();
+    iniciarBiblioteca();
 }
 
 document.addEventListener("DOMContentLoaded", iniciarLayout);
