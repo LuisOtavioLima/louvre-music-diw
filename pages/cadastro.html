@@ -117,12 +117,30 @@
                     <ul class="lista-gerenciamento" id="lista-gerenciamento"></ul>
                 </div>
             </section>
+
+            <!-- Integração com a API pública do iTunes -->
+            <section class="painel-itunes">
+                <h3>Importar do iTunes</h3>
+                <p class="dica-campo">Pesquise um álbum na API pública do iTunes e adicione à sua biblioteca com todas as faixas.</p>
+
+                <form id="form-itunes" class="busca-itunes">
+                    <div class="busca-biblio-container">
+                        <span class="material-symbols-outlined">search</span>
+                        <label for="busca-itunes" class="sr-only">Pesquisar álbum no iTunes</label>
+                        <input type="text" id="busca-itunes" placeholder="Nome do álbum ou artista" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-primario" id="btn-buscar-itunes">Buscar</button>
+                </form>
+
+                <ul class="lista-gerenciamento" id="resultados-itunes"></ul>
+            </section>
         </main>
     </div>
 
     <div id="footer-placeholder"></div>
     <script src="../assets/js/dados.js"></script>
     <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
     <script src="../assets/js/player.js"></script>
     <script src="../assets/js/busca.js"></script>
     <script src="../assets/js/cadastro.js"></script>

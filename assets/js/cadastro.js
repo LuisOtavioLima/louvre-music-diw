@@ -198,6 +198,74 @@ async function tratarCliqueNaLista(evento) {
     renderizarLista();
 }
 
+/* ---------- Importar do iTunes (API) ---------- */
+
+let resultadosItunes = []; // últimos álbuns encontrados na API
+
+function renderizarResultadosItunes() {
+    const lista = document.getElementById("resultados-itunes");
+
+    lista.innerHTML = resultadosItunes
+        .map((album) => {
+            const jaTem = albumItunesJaImportado(album);
+            return `
+            <li data-id="${escapar(album.id)}">
+                <img src="${escapar(capaUrl(album))}" alt="Capa ${escapar(album.titulo)}" width="48" loading="lazy">
+                <div class="info-item">
+                    <p class="titulo">${escapar(album.titulo)}</p>
+                    <p class="detalhes">${escapar(album.artista)} • ${album.ano} • ${escapar(album.genero)}</p>
+                </div>
+                <button type="button" class="btn-secundario" data-acao="importar" ${jaTem ? "disabled" : ""}>
+                    ${jaTem ? "Na biblioteca" : "Importar"}
+                </button>
+            </li>`;
+        })
+        .join("");
+}
+
+async function pesquisarNoItunes(evento) {
+    evento.preventDefault();
+
+    const termo = document.getElementById("busca-itunes").value.trim();
+    const lista = document.getElementById("resultados-itunes");
+    if (termo.length < 2) {
+        mostrarToast("Digite pelo menos 2 letras para pesquisar.", "erro");
+        return;
+    }
+
+    lista.innerHTML = '<li class="vazio">Buscando no iTunes...</li>';
+    try {
+        resultadosItunes = await buscarAlbunsNoItunes(termo, 8);
+        if (resultadosItunes.length === 0) {
+            lista.innerHTML = `<li class="vazio">Nenhum álbum encontrado para "${escapar(termo)}".</li>`;
+            return;
+        }
+        renderizarResultadosItunes();
+    } catch (erro) {
+        console.error("Falha ao consultar o iTunes:", erro);
+        lista.innerHTML = '<li class="vazio">Não foi possível consultar o iTunes agora. Verifique sua conexão e tente de novo.</li>';
+    }
+}
+
+async function importarAlbum(evento) {
+    const botao = evento.target.closest('[data-acao="importar"]');
+    if (!botao) return;
+
+    const idItunes = botao.closest("li").dataset.id.replace("itunes-", "");
+    botao.disabled = true;
+    botao.textContent = "Importando...";
+
+    try {
+        const album = await importarAlbumDoItunes(idItunes);
+        mostrarToast(`Álbum "${album.titulo}" importado com ${pluralizar(album.faixas.length, "faixa", "faixas")}!`);
+        renderizarLista();
+    } catch (erro) {
+        console.error("Falha ao importar do iTunes:", erro);
+        mostrarToast("Não foi possível importar o álbum. Tente novamente.", "erro");
+    }
+    renderizarResultadosItunes();
+}
+
 /* ---------- Inicialização ---------- */
 
 function iniciarCadastro() {
@@ -213,6 +281,9 @@ function iniciarCadastro() {
         const controle = document.getElementById(id);
         controle.addEventListener(id === "busca-cadastro" ? "input" : "change", renderizarLista);
     });
+
+    document.getElementById("form-itunes").addEventListener("submit", pesquisarNoItunes);
+    document.getElementById("resultados-itunes").addEventListener("click", importarAlbum);
 
     renderizarLista();
 

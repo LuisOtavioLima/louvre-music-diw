@@ -1105,3 +1105,33 @@ body[data-layout="sem-sidebar"] .barra-busca {
         visibility: visible;
     }
 }
+
+/* ========================================================
+   Importar do iTunes (cadastro)
+   ======================================================== */
+
+.painel-itunes {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #282828;
+}
+
+.painel-itunes .dica-campo {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.busca-itunes {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.busca-itunes .busca-biblio-container {
+    flex: 1;
+}
+
+.lista-gerenciamento .btn-secundario:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
