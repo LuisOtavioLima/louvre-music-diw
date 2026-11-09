@@ -161,6 +161,12 @@
     padding: 16px 0;
 }
 
+.nota-audio {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
 .aviso-previa {
     margin-bottom: 16px;
     padding: 10px 14px;

@@ -116,7 +116,8 @@ function desenharAlbum(album, previa = false) {
                 </tr>
             </thead>
             <tbody id="corpo-faixas"></tbody>
-        </table>`;
+        </table>
+        <p class="nota-audio">Som: trechos de 30 s fornecidos pelo iTunes. Faixas sem trecho disponível tocam em modo simulado (sem áudio).</p>`;
 
     renderizarFaixas();
     ligarEventos();
