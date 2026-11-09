@@ -24,6 +24,7 @@ body {
     
     /* CUMPRE O REQUISITO: CSS GRID NO LAYOUT PRINCIPAL */
     display: grid;
+    grid-template-columns: minmax(0, 1fr); /* a coluna nunca passa da largura da tela */
     grid-template-rows: 70px minmax(0, 1fr) 90px; /* Header | Meio | Footer (minmax(0) deixa o meio rolar por dentro) */
 }
 
@@ -85,6 +86,11 @@ a:hover {
     margin-left: 8px;
     width: 100%;
     font-family: inherit;
+}
+
+.barra-busca input,
+.busca-biblio-container input {
+    min-width: 0; /* deixa o campo encolher em telas pequenas */
 }
 
 .barra-busca input:focus, .busca-biblio-container input:focus {
@@ -402,19 +408,6 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .tocando-agora {
-        width: auto;
-    }
-
-    .tocando-agora .info-item {
-        display: none;
-    }
-
-    .volume-grupo,
-    .barra-progresso {
-        display: none;
-    }
-
     .barra-busca {
         width: auto;
         flex: 1;
@@ -466,6 +459,7 @@ a:hover {
 .btn-menu {
     background: none;
     border: none;
+    padding: 0;
     color: inherit;
     cursor: pointer;
     display: flex;
@@ -778,6 +772,7 @@ body[data-layout="sem-sidebar"] .barra-busca {
 .btn-player {
     background: none;
     border: none;
+    padding: 0;
     color: inherit;
     cursor: pointer;
     display: flex;
@@ -1369,5 +1364,41 @@ body[data-layout="sem-sidebar"] .barra-busca {
     .cabecalho-perfil {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+/* ========================================================
+   Celular: rodapé (fica no fim do arquivo para vencer as regras base acima)
+   ======================================================== */
+
+@media (max-width: 768px) {
+    .rodape {
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    /* o nome da música continua aparecendo, com reticências se for longo */
+    .tocando-agora {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        gap: 12px;
+    }
+
+    .player-centro {
+        flex: 0 0 auto;
+    }
+
+    .player {
+        gap: 8px;
+    }
+
+    .controles {
+        width: auto;
+    }
+
+    .volume-grupo,
+    .barra-progresso {
+        display: none;
     }
 }
