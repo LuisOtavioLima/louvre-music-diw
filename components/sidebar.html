@@ -1,0 +1,19 @@
+<aside class="biblioteca">
+
+    <div class="cabecalho-biblioteca">
+        <h2>Biblioteca</h2>
+
+        <div class="acoes-biblio">
+            <a href="pages/cadastro.html" title="Adicionar Álbum"><span class="material-symbols-outlined">add</span></a>
+        </div>
+    </div>
+
+    <div class="busca-biblio-container">
+        <span class="material-symbols-outlined">search</span>
+        <label for="busca-biblioteca" class="sr-only">Buscar na biblioteca</label>
+        <input type="text" id="busca-biblioteca" name="busca-biblioteca" placeholder="Buscar em sua biblioteca" autocomplete="off">
+    </div>
+
+    <!-- A lista de álbuns é montada por assets/js/busca.js a partir do localStorage -->
+    <ul class="lista-biblioteca" id="lista-biblioteca"></ul>
+</aside>

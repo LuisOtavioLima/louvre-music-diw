@@ -1,0 +1,175 @@
+/* ==========================================================================
+   componentes.css — peças reutilizadas em várias páginas (botões, busca, avisos, janelas)
+   ========================================================================== */
+
+/* ---------- Botões ---------- */
+.btn-primario,
+.btn-secundario,
+.btn-icone {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-primario {
+    background-color: var(--cor-destaque);
+    color: black;
+}
+
+.btn-primario:hover {
+    transform: scale(1.05);
+}
+
+.btn-secundario {
+    background-color: transparent;
+    border: 1px solid #555;
+    color: white;
+}
+
+.btn-secundario:hover {
+    border-color: white;
+}
+
+.btn-icone {
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+}
+
+.perigo {
+    color: var(--cor-perigo);
+}
+
+.btn-perigo {
+    background-color: var(--cor-perigo);
+    color: #fff;
+}
+
+/* botão só com ícone: vem depois de .perigo de propósito (o ícone fica cinza e só ficaria vermelho no hover) */
+.btn-icone {
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    background: transparent;
+    color: var(--texto-secundario);
+}
+
+.btn-icone:hover {
+    background-color: #333;
+    color: var(--texto-primario);
+}
+
+.btn-icone.perigo:hover {
+    color: var(--cor-perigo);
+}
+
+/* ---------- Campo de busca (header, biblioteca e cadastro) ---------- */
+.barra-busca input, .busca-biblio-container input {
+    background: transparent;
+    border: none;
+    color: var(--texto-primario);
+    margin-left: 8px;
+    width: 100%;
+    min-width: 0; /* deixa o campo encolher em telas pequenas */
+    font-family: inherit;
+}
+
+.barra-busca input:focus, .busca-biblio-container input:focus {
+    outline: none;
+}
+
+.busca-biblio-container {
+    display: flex;
+    background-color: #242424;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* ---------- Título e detalhes de um item de lista ---------- */
+.info-item .titulo {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.info-item .detalhes {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+/* ---------- Textos de apoio ---------- */
+.textos-album .tipo,
+.cabecalho-perfil .tipo {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+.info-album {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.info-album strong {
+    color: var(--texto-primario);
+}
+
+/* ---------- Avisos (toast) ---------- */
+#area-toasts {
+    position: fixed;
+    right: 24px;
+    bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+}
+
+.toast {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #282828;
+    border-left: 4px solid var(--cor-destaque);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    animation: toast-entrada 0.2s ease;
+}
+
+.toast-erro {
+    border-left-color: var(--cor-perigo);
+}
+
+@keyframes toast-entrada {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* ---------- Janelas (modal) ---------- */
+.modal {
+    background-color: #282828;
+    color: var(--texto-primario);
+    border: none;
+    border-radius: 8px;
+    padding: 24px;
+    margin: auto;
+    font-family: inherit;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-confirmacao {
+    width: min(420px, 90vw);
+}
+
+.modal-confirmacao p {
+    color: var(--texto-secundario);
+    margin: 12px 0 20px;
+    font-size: 14px;
+}

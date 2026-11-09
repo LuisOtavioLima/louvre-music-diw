@@ -7,9 +7,7 @@
 
     <title>Um | Louvre Music</title>
 
-    <link
-        rel="stylesheet" href="../assets/css/style.css">    
-    >
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,204 +18,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
-<body>
-    <header class = "cabecalho">
-        <div class = "marca">
+<body data-album-id="um">
+    <div id="header-placeholder"></div>
 
-            <!--href + a = vai pra lá-->
-            <a href = "index.html"><h1>Louvre</h1></a>
-            
-        </div>
+    <div class="container-principal">
 
-        <div class="barra-busca">
+        <div id="sidebar-placeholder"></div>
 
-            <span class="material-symbols-outlined">
-                search
-            </span>
-
-            <label for="busca-principal" class="sr-only">Busca Principal</label>
-            <input type="text" id="busca-principal" name="busca" placeholder="Hoje é dia de?">
-
-        </div>
-
-        <div class="menu-perfil">
-            <a href="../pages/perfil.html" title="Meu Perfil">
-                <span class="material-symbols-outlined">account_circle</span>
-            </a>
-        </div>
-    </header>
-
-    <div class = "conteiner-principal">
-
-        <aside class = "biblioteca">
-
-            <div class = "cabecalho-biblioteca">
-
-                <h2>Biblioteca</h2>
-
-                <!-- ícones que eram ações agora são botões/links -->
-                <div class="acoes-biblio">
-                    <a href="../pages/cadastro.html" title="Adicionar Álbum"><span class="material-symbols-outlined">add</span></a>
-                </div>
-            </div>
-            
-            <div class="busca-biblio-container">
-                <span class="material-symbols-outlined">search</span>
-                <label for="busca-biblioteca" class="sr-only">Buscar na biblioteca</label>
-                <input type="text" id="busca-biblioteca" name="busca-biblioteca" placeholder="Buscar em sua biblioteca">
-            </div>
-
-            <!-- Lista de Álbuns na Biblioteca -->
-            <ul class="lista-biblioteca">
-
-                <!-- Son of Spergy -->
-                <li>
-                    <img src="../assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy" width="48">
-                    <div class="info-item">
-                        <p class="titulo">Son Of Spergy</p>
-                        <p class="detalhes">
-                            Álbum • Daniel Caesar
-                        </p>
-                    </div>
-                </li>
-
-                <!-- Um -->
-                <li>
-                    <img src="../assets/img/capa-um.jpg" alt="Capa Um" width="48">
-                    <div class="info-item">
-                        <p class="titulo">Um</p>
-                        <p class="detalhes">Álbum • Luccas Carlos</p>
-                    </div>
-                </li>
-            </ul>
-        </aside>
-
-        <!-- Detalhes -->
-        <main class="detalhes-album">
-            
-            <header class="cabecalho-album-info">
-                
-                <img src="../assets/img/capa-um.jpg" alt="Capa Um" width="200">
-                <div class="textos-album">
-                    <p class="tipo">Álbum</p>
-                    <h2>Um</h2>
-                    <p class="info-album">
-                        <strong>Luccas Carlos</strong> • 2017 • 7 músicas, 20min 52 s
-                    </p>
-                </div>
-            </header>
-
-            <!-- Botões de Ação -->
-            <div class="acoes-album">
-                <span class="material-symbols-outlined play-grande">play_arrow</span>
-                <span class="material-symbols-outlined">favorite</span>
-                <span class="material-symbols-outlined">more_horiz</span>
-            </div>
-
-            <!-- Tabela de Faixas -->
-            <table class="tabela-faixas">
-                <!-- Thead é o cabeçalho da tabela -->
-                <thead>
-                    <!-- table row-->
-                    <tr>
-                        <!-- título das colunas -->
-                        <th>#</th>
-                        <th>Título</th>
-                        <th>Reproduções</th>
-                        <th><span class="material-symbols-outlined">schedule</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <!-- table data -->
-                        <td>1</td>
-                        <td>
-                            <p class="nome-musica">Noite Inteira - Pt. 1</p>
-                            <p class="artistas-musica">Luccas Carlos</p>
-                        </td>
-                        <td>1.861.772</td>
-                        <td>1:42</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <p class="nome-musica">Neblina</p>
-                            <p class="artistas-musica">Luccas Carlos</p>
-                        </td>
-                        <td>20.871.802</td>
-                        <td>3:49</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                            <p class="nome-musica">Fala</p>
-                            <p class="artistas-musica">Luccas Carlos</p>
-                        </td>
-                        <td>4.181.122</td>
-                        <td>2:45</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>
-                            <p class="nome-musica">Onde Você Tava?</p>
-                            <p class="artistas-musica">Luccas Carlos</p>
-                        </td>
-                        <td>5.640.029</td>
-                        <td>3:13</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>
-                            <p class="nome-musica">O Que Quiser Fazer</p>
-                            <p class="artistas-musica">Luccas Carlos, BK</p>
-                        </td>
-                        <td>32.587.970</td>
-                        <td>3:45</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>
-                            <p class="nome-musica">Ford</p>
-                            <p class="artistas-musica">Luccas Carlos, Sain</p>
-                        </td>
-                        <td>2.000.861</td>
-                        <td>3:08</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>
-                            <p class="nome-musica">Noite Inteira - Pt. 2</p>
-                            <p class="artistas-musica">Luccas Carlos</p>
-                        </td>
-                        <td>2.155.459</td>
-                        <td>2:27</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Detalhes do álbum: o conteúdo é montado por assets/js/album.js -->
+        <main class="detalhes-album" id="conteudo-album">
+            <p class="vazio">Carregando álbum...</p>
         </main>
     </div>
 
-    <footer class="rodape">
-        <article class="tocando-agora">
-            <img src="../assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy">
-            <div class="info-item">
-                <p class="titulo">Son Of Spergy</p>
-                <p class="detalhes">Álbum • Daniel Caesar</p>
-            </div>
-        </article>
-
-        <div class="player">
-            <span class="material-symbols-outlined">skip_previous</span>
-            <span class="material-symbols-outlined play-btn">play_circle</span>
-            <span class="material-symbols-outlined">skip_next</span>
-        </div>
-
-        <div class="controles">
-            <span class="material-symbols-outlined">menu</span>
-            <span class="material-symbols-outlined">volume_up</span>
-            <label for="volume" class="sr-only">Volume</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="../assets/js/dados.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/player.js"></script>
+    <script src="../assets/js/busca.js"></script>
+    <script src="../assets/js/album.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>

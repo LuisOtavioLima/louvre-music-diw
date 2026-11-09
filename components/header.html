@@ -1,0 +1,24 @@
+<header class="cabecalho">
+    <div class="marca">
+        <!-- Botão de recolher a biblioteca (não aparece nas páginas sem sidebar) -->
+        <button type="button" class="btn-menu" id="btn-menu" title="Recolher/expandir biblioteca" aria-label="Recolher ou expandir a biblioteca">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html"><h1>Louvre</h1></a>
+    </div>
+
+    <div class="barra-busca">
+        <span class="material-symbols-outlined">search</span>
+        <label for="busca-principal" class="sr-only">Busca Principal</label>
+        <input type="text" id="busca-principal" name="busca" placeholder="Hoje é dia de?" autocomplete="off">
+
+        <!-- Resultados da busca (montados por assets/js/busca.js) -->
+        <div class="resultados-busca" id="resultados-busca" hidden></div>
+    </div>
+
+    <div class="menu-perfil">
+        <a href="pages/perfil.html" title="Meu Perfil">
+            <span class="material-symbols-outlined">account_circle</span>
+        </a>
+    </div>
+</header>

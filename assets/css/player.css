@@ -1,0 +1,284 @@
+/* ==========================================================================
+   player.css — rodapé com o player e modal da fila de reprodução
+   ========================================================================== */
+
+.rodape {
+    border-top: 1px solid #282828;
+}
+
+.tocando-agora {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 30%;
+}
+
+.tocando-agora a {
+    display: block;
+    flex-shrink: 0;
+}
+
+.tocando-agora img {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.tocando-agora .info-item {
+    min-width: 0;
+}
+
+.tocando-agora .info-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.player span {
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--texto-secundario);
+}
+
+.player span:hover { color: var(--texto-primario); }
+.player .play-btn { font-size: 40px; color: var(--texto-primario); }
+
+.controles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 30%;
+    justify-content: flex-end;
+}
+
+.btn-player {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+}
+
+.btn-player:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.tocando-agora a {
+    display: block;
+    flex-shrink: 0;
+}
+
+.tocando-agora img {
+    display: block;
+    height: 56px;
+    object-fit: cover;
+}
+
+.tocando-agora .info-item {
+    min-width: 0;
+}
+
+.tocando-agora .info-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.player-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    max-width: 520px;
+}
+
+.barra-progresso {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    font-size: 11px;
+    color: var(--texto-secundario);
+}
+
+.barra-progresso input {
+    flex: 1;
+    accent-color: var(--cor-destaque);
+}
+
+.volume-grupo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-grupo input {
+    width: 100px;
+    accent-color: var(--cor-destaque);
+}
+
+.controles .material-symbols-outlined {
+    color: var(--texto-secundario);
+}
+
+.controles .btn-player:hover .material-symbols-outlined {
+    color: var(--texto-primario);
+}
+
+.selo-fila {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background-color: var(--cor-destaque);
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-fila {
+    width: min(520px, 92vw);
+    max-height: 80vh;
+}
+
+.cabecalho-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-fila h4 {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    margin: 16px 0 8px;
+}
+
+.titulo-secao-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-secao-fila .btn-secundario {
+    padding: 4px 12px;
+    font-size: 12px;
+}
+
+.lista-fila {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-fila {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.item-fila-tocar {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.item-fila-tocar:hover {
+    background-color: #333;
+}
+
+.item-fila-tocar img {
+    border-radius: 4px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.item-fila .info-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.item-fila .info-item span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item-fila .titulo {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.item-fila .detalhes {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+.item-fila.atual .titulo {
+    color: var(--cor-destaque);
+}
+
+.duracao-fila {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+/* Celular: fica no fim do arquivo para vencer as regras base acima */
+@media (max-width: 768px) {
+    .rodape {
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    /* o nome da música continua aparecendo, com reticências se for longo */
+    .tocando-agora {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        gap: 12px;
+    }
+
+    .player-centro {
+        flex: 0 0 auto;
+    }
+
+    .player {
+        gap: 8px;
+    }
+
+    .controles {
+        width: auto;
+    }
+
+    .volume-grupo,
+    .barra-progresso {
+        display: none;
+    }
+}

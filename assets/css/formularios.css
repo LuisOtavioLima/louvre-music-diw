@@ -1,0 +1,92 @@
+/* ==========================================================================
+   formularios.css — campos, erros e botões de formulário (cadastro e perfil)
+   ========================================================================== */
+
+.grupo-input {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grupo-input label {
+    font-size: 14px;
+    color: var(--texto-secundario);
+}
+
+.grupo-input input {
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #242424;
+    color: white;
+    font-family: inherit;
+}
+
+.grupo-input input:focus {
+    border-color: var(--cor-destaque);
+    outline: none;
+}
+
+.grupo-input textarea,
+.controle-select select {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--texto-primario);
+    background-color: #242424;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.grupo-input textarea {
+    padding: 12px;
+    resize: vertical;
+}
+
+.grupo-input textarea:focus,
+.controle-select select:focus {
+    border-color: var(--cor-destaque);
+    outline: none;
+}
+
+.grupo-input input.invalido,
+.grupo-input textarea.invalido {
+    border-color: var(--cor-perigo);
+}
+
+.erro-campo {
+    color: var(--cor-perigo);
+    font-size: 12px;
+}
+
+.erro-campo:empty {
+    display: none;
+}
+
+.dica-campo {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.dica-campo code {
+    color: var(--texto-primario);
+}
+
+.linha-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.grupo-acoes-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .linha-dupla {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,101 @@
+/* ==========================================================================
+   biblioteca.css — biblioteca lateral (sidebar)
+   ========================================================================== */
+
+.biblioteca {
+    background-color: var(--bg-biblioteca);
+    width: 350px; /* Largura padrão definida na etapa 2 */
+    align-self: stretch; /* ocupa toda a altura do miolo */
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    transition: width 0.3s ease; /* Transição suave para o movimento */
+}
+
+/* O estado quando a classe é ativada pelo JS */
+.biblioteca.recolhida {
+    width: 80px; 
+    align-items: center; /* Centraliza os ícones */
+}
+
+/* Esconde textos, barra de busca e títulos quando estiver recolhida */
+.biblioteca.recolhida h2,
+.biblioteca.recolhida .busca-biblio-container,
+.biblioteca.recolhida .info-item,
+.biblioteca.recolhida .acoes-biblio {
+    display: none;
+}
+
+.cabecalho-biblioteca {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--texto-secundario);
+}
+
+.lista-biblioteca {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lista-biblioteca li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.lista-biblioteca li:hover {
+    background-color: #282828;
+}
+
+.lista-biblioteca li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.lista-biblioteca li a:hover,
+.lista-biblioteca li a.ativo {
+    background-color: #282828;
+    color: inherit;
+}
+
+.lista-biblioteca li a.ativo .titulo {
+    color: var(--cor-destaque);
+}
+
+.lista-biblioteca li.vazio:hover {
+    background: none;
+}
+
+.lista-biblioteca img {
+    width: 48px;
+    border-radius: 4px;
+}
+
+/* Ajusta as imagens da lista para ficarem centralizadas */
+.biblioteca.recolhida .lista-biblioteca li {
+    padding: 8px 0;
+    justify-content: center;
+}
+
+.biblioteca.recolhida .lista-biblioteca li a {
+    padding: 8px 0;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .biblioteca {
+        display: none;
+    }
+}

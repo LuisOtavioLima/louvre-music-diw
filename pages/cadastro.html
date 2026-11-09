@@ -4,75 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerir Biblioteca | Louvre Music</title>
-    <link rel="stylesheet" href="../assets/css/style.css">    
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
-<body>
-    <header class="cabecalho">
-        <div class="marca">
-            <a href="../index.html"><h1>Louvre</h1></a>
-        </div>
-        <div class="menu-perfil">
-            <a href="perfil.html" title="Meu Perfil"><span class="material-symbols-outlined">account_circle</span></a>
-        </div>
-    </header>
+<!-- data-layout="sem-sidebar": esta página não tem biblioteca, nem botão de recolher, nem busca -->
+<body data-layout="sem-sidebar">
+    <div id="header-placeholder"></div>
 
     <div class="container-principal layout-centralizado">
         <main class="area-cadastro">
             <h2>Gerenciar Álbuns</h2>
-            
+
             <section class="painel-formularios">
-                <!-- Formulário de Criação exigido pelo professor -->
-                <form action="#" method="POST" class="form-cadastro">
-                    <h3>Cadastrar Novo Álbum</h3>
-                    
+                <!-- Cadastro e edição usam o mesmo formulário -->
+                <form id="form-album" class="form-cadastro" novalidate>
+                    <h3 id="titulo-form">Cadastrar Novo Álbum</h3>
+
                     <div class="grupo-input">
-                        <label for="nome-album">Título do Álbum</label>
-                        <input type="text" id="nome-album" name="nome-album" required>
+                        <label for="campo-titulo">Título do Álbum</label>
+                        <input type="text" id="campo-titulo" name="titulo" maxlength="80" autocomplete="off">
+                        <small class="erro-campo" id="erro-titulo"></small>
                     </div>
 
                     <div class="grupo-input">
-                        <label for="artista-album">Artista</label>
-                        <input type="text" id="artista-album" name="artista-album" required>
+                        <label for="campo-artista">Artista</label>
+                        <input type="text" id="campo-artista" name="artista" maxlength="60" autocomplete="off">
+                        <small class="erro-campo" id="erro-artista"></small>
+                    </div>
+
+                    <div class="linha-dupla">
+                        <div class="grupo-input">
+                            <label for="campo-ano">Ano</label>
+                            <input type="number" id="campo-ano" name="ano" min="1900">
+                            <small class="erro-campo" id="erro-ano"></small>
+                        </div>
+
+                        <div class="grupo-input">
+                            <label for="campo-genero">Gênero</label>
+                            <input type="text" id="campo-genero" name="genero" list="lista-generos" maxlength="30" autocomplete="off">
+                            <datalist id="lista-generos">
+                                <option value="Pop"></option>
+                                <option value="Rock"></option>
+                                <option value="Rap/Hip-hop"></option>
+                                <option value="R&B"></option>
+                                <option value="MPB"></option>
+                                <option value="Samba/Pagode"></option>
+                                <option value="Sertanejo"></option>
+                                <option value="Funk"></option>
+                                <option value="Eletrônica"></option>
+                                <option value="Jazz"></option>
+                            </datalist>
+                            <small class="erro-campo" id="erro-genero"></small>
+                        </div>
                     </div>
 
                     <div class="grupo-input">
-                        <label for="ano-album">Ano de Lançamento</label>
-                        <input type="number" id="ano-album" name="ano-album" min="1900" max="2026">
+                        <label for="campo-capa">Capa (link da imagem, opcional)</label>
+                        <input type="text" id="campo-capa" name="capa" placeholder="https://..." autocomplete="off">
+                        <small class="erro-campo" id="erro-capa"></small>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="campo-faixas">Faixas (uma por linha, opcional)</label>
+                        <textarea id="campo-faixas" name="faixas" rows="5" placeholder="Nome da faixa | 3:45 | Artistas (opcional)"></textarea>
+                        <small class="dica-campo">Formato: <code>Título | m:ss | Artistas</code>. Sem duração, usamos 3:00.</small>
+                        <small class="erro-campo" id="erro-faixas"></small>
                     </div>
 
                     <div class="grupo-acoes-form">
-                        <button type="reset" class="btn-secundario">Limpar</button>
-                        <button type="submit" class="btn-primario">Salvar Álbum</button>
+                        <button type="button" class="btn-secundario" id="btn-limpar">Limpar</button>
+                        <button type="button" class="btn-secundario" id="btn-cancelar-edicao" hidden>Cancelar edição</button>
+                        <button type="submit" class="btn-primario" id="btn-salvar">Salvar Álbum</button>
                     </div>
                 </form>
 
-                <!-- Área de Listagem/Edição para cumprir requisito -->
+                <!-- Listagem com pesquisa, filtro, ordenação, edição e exclusão -->
                 <div class="area-edicao">
-                    <h3>Álbuns Cadastrados (Editar/Excluir)</h3>
+                    <h3>Álbuns Cadastrados <span class="contador" id="contador-albuns"></span></h3>
+
                     <div class="controles-filtro">
-                        <button class="btn-secundario"><span class="material-symbols-outlined">filter_list</span> Filtrar</button>
-                        <button class="btn-secundario"><span class="material-symbols-outlined">sort</span> Ordenar</button>
+                        <div class="busca-biblio-container">
+                            <span class="material-symbols-outlined">search</span>
+                            <label for="busca-cadastro" class="sr-only">Pesquisar álbuns</label>
+                            <input type="text" id="busca-cadastro" placeholder="Pesquisar por título ou artista" autocomplete="off">
+                        </div>
+
+                        <div class="linha-dupla">
+                            <label class="controle-select">
+                                <span class="material-symbols-outlined">filter_list</span>
+                                <span class="sr-only">Filtrar por gênero</span>
+                                <select id="filtro-genero"></select>
+                            </label>
+
+                            <label class="controle-select">
+                                <span class="material-symbols-outlined">sort</span>
+                                <span class="sr-only">Ordenar por</span>
+                                <select id="ordenacao">
+                                    <option value="recentes">Mais recentes</option>
+                                    <option value="titulo-az">Título (A–Z)</option>
+                                    <option value="titulo-za">Título (Z–A)</option>
+                                    <option value="artista-az">Artista (A–Z)</option>
+                                    <option value="ano-novo">Ano (mais novo)</option>
+                                    <option value="ano-antigo">Ano (mais antigo)</option>
+                                </select>
+                            </label>
+                        </div>
                     </div>
-                    
-                    <ul class="lista-gerenciamento">
-                        <li>
-                            <span>Son Of Spergy - Daniel Caesar</span>
-                            <div class="acoes">
-                                <button class="btn-icone" title="Editar"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="btn-icone perigo" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
-                            </div>
-                        </li>
-                    </ul>
+
+                    <!-- A lista é montada por assets/js/cadastro.js -->
+                    <ul class="lista-gerenciamento" id="lista-gerenciamento"></ul>
                 </div>
+            </section>
+
+            <!-- Integração com a API pública do iTunes -->
+            <section class="painel-itunes">
+                <h3>Importar do iTunes</h3>
+                <p class="dica-campo">Pesquise um álbum na API pública do iTunes e adicione à sua biblioteca com todas as faixas.</p>
+
+                <form id="form-itunes" class="busca-itunes">
+                    <div class="busca-biblio-container">
+                        <span class="material-symbols-outlined">search</span>
+                        <label for="busca-itunes" class="sr-only">Pesquisar álbum no iTunes</label>
+                        <input type="text" id="busca-itunes" placeholder="Nome do álbum ou artista" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-primario" id="btn-buscar-itunes">Buscar</button>
+                </form>
+
+                <ul class="lista-gerenciamento" id="resultados-itunes"></ul>
             </section>
         </main>
     </div>
 
-    <footer class="rodape">
-        <p style="text-align: center; width: 100%; color: #b3b3b3;">Louvre Music - Painel de Administração</p>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="../assets/js/dados.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/player.js"></script>
+    <script src="../assets/js/busca.js"></script>
+    <script src="../assets/js/cadastro.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
