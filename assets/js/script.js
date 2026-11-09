@@ -1,55 +1,81 @@
-async function loadComponent(elementId, componentPath, basePath) {
-    try {
-        const response = await fetch(componentPath);
-        if (response.ok) {
-            let html = await response.text();
-            
-            if (basePath === "../") {
-                html = html.replace(/src="assets\//g, 'src="../assets/');
-                html = html.replace(/href="index\.html"/g, 'href="../index.html"');
-                html = html.replace(/href="pages\//g, 'href="');
+/* ==========================================================================
+   script.js — monta o layout em todas as páginas (header, sidebar e footer)
+   ========================================================================== */
+
+// Raiz do site, descoberta a partir do endereço deste próprio arquivo
+// (…/assets/js/script.js). Assim os caminhos funcionam em qualquer pasta
+// e também no GitHub Pages, onde o site fica em /nome-do-repositorio/.
+const RAIZ = new URL("../../", document.currentScript.src).href;
+
+// Converte um caminho "da raiz" (ex.: "assets/img/capa.jpg") em endereço completo.
+function caminho(relativo) {
+    return RAIZ + relativo;
+}
+
+// Os components são escritos com caminhos a partir da raiz (assets/..., pages/...).
+// Depois de inseridos na página, convertemos todos eles para endereços completos.
+function ajustarCaminhos(container) {
+    const externo = /^(https?:|data:|mailto:|#|\/)/;
+
+    container.querySelectorAll("[src], [href]").forEach((elemento) => {
+        ["src", "href"].forEach((atributo) => {
+            const valor = elemento.getAttribute(atributo);
+            if (valor && !externo.test(valor)) {
+                elemento.setAttribute(atributo, caminho(valor));
             }
-            
-            document.getElementById(elementId).innerHTML = html;
-        }
-    } catch (error) {
-        console.error(`Erro ao carregar ${componentPath}:`, error);
-    }
-}
-
-async function initLayout() {
-    const currentPath = window.location.pathname;
-    const isCadastro = currentPath.includes("cadastro.html");
-    const basePath = currentPath.includes("/pages/") ? "../" : "";
-
-    // 1. SEMPRE carrega o Header (em todas as páginas)
-    await loadComponent("header-placeholder", `${basePath}components/header.html`, basePath);
-
-    if (isCadastro) {
-        // Se FOR a página de cadastro: esconde a barra de pesquisa
-        const barraBusca = document.querySelector(".barra-busca");
-        if (barraBusca) {
-            barraBusca.style.display = "none";
-        }
-    } else {
-        // Se NÃO FOR cadastro: carrega sidebar e footer
-        await loadComponent("sidebar-placeholder", `${basePath}components/sidebar.html`, basePath);
-        await loadComponent("footer-placeholder", `${basePath}components/footer.html`, basePath);
-        
-        // Ativa a lógica do botão de menu após a sidebar carregar
-        initSidebar();
-    }
-}
-
-function initSidebar() {
-    const btnMenu = document.getElementById("btn-menu"); // Busca o botão que adicionamos na header
-    const sidebar = document.querySelector(".biblioteca");
-
-    if (btnMenu && sidebar) {
-        btnMenu.addEventListener("click", () => {
-            sidebar.classList.toggle("recolhida");
         });
+    });
+}
+
+// Busca um arquivo de components/ e coloca dentro do placeholder da página.
+async function carregarComponente(idPlaceholder, arquivo) {
+    const placeholder = document.getElementById(idPlaceholder);
+    if (!placeholder) return; // nem toda página tem todos os placeholders
+
+    try {
+        const resposta = await fetch(caminho(`components/${arquivo}`));
+        if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+
+        placeholder.innerHTML = await resposta.text();
+        ajustarCaminhos(placeholder);
+    } catch (erro) {
+        console.error(`Erro ao carregar components/${arquivo}:`, erro);
+
+        if (location.protocol === "file:") {
+            // fetch() não funciona abrindo o arquivo direto (file://)
+            placeholder.textContent = "Abra o site por um servidor (Live Server ou GitHub Pages).";
+        }
     }
 }
 
-document.addEventListener("DOMContentLoaded", initLayout);
+// Botão de recolher/expandir a biblioteca. O estado fica salvo no navegador
+// para a biblioteca continuar recolhida ao trocar de página.
+function iniciarSidebar() {
+    const botao = document.getElementById("btn-menu");
+    const sidebar = document.querySelector(".biblioteca");
+    if (!botao || !sidebar) return;
+
+    const CHAVE = "louvre:biblioteca-recolhida";
+
+    if (localStorage.getItem(CHAVE) === "1") {
+        sidebar.classList.add("recolhida");
+    }
+
+    botao.addEventListener("click", () => {
+        const recolhida = sidebar.classList.toggle("recolhida");
+        localStorage.setItem(CHAVE, recolhida ? "1" : "0");
+    });
+}
+
+async function iniciarLayout() {
+    // Os três components são carregados ao mesmo tempo.
+    await Promise.all([
+        carregarComponente("header-placeholder", "header.html"),
+        carregarComponente("sidebar-placeholder", "sidebar.html"),
+        carregarComponente("footer-placeholder", "footer.html"),
+    ]);
+
+    iniciarSidebar();
+}
+
+document.addEventListener("DOMContentLoaded", iniciarLayout);
