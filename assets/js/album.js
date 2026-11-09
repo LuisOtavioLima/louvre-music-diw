@@ -57,11 +57,34 @@ function renderizarFaixas() {
 
 /* ---------- Montagem da página ---------- */
 
-function desenharAlbum(album) {
+function htmlAcoesBiblioteca(album) {
+    return `
+            <button type="button" class="btn-icone btn-favorito ${album.favorito ? "ativo" : ""}" id="btn-favorito" title="Favoritar" aria-label="Favoritar álbum" aria-pressed="${album.favorito}">
+                <span class="material-symbols-outlined">favorite</span>
+            </button>
+            <div class="menu-album">
+                <button type="button" class="btn-icone" id="btn-mais" title="Mais opções" aria-label="Mais opções" aria-haspopup="true">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                </button>
+                <ul class="menu-opcoes" id="menu-opcoes" hidden>
+                    <li><button type="button" data-acao="fila-album">Adicionar álbum à fila</button></li>
+                    <li><button type="button" data-acao="editar-album">Editar álbum</button></li>
+                    <li><button type="button" data-acao="excluir-album" class="perigo">Excluir álbum</button></li>
+                </ul>
+            </div>`;
+}
+
+function htmlAcoesPrevia() {
+    return '<button type="button" class="btn-primario" id="btn-adicionar-biblioteca">Adicionar à biblioteca</button>';
+}
+
+// previa = true: álbum vindo do iTunes que ainda não foi adicionado à biblioteca
+function desenharAlbum(album, previa = false) {
     albumAberto = album;
     document.title = `${album.titulo} | Louvre Music`;
 
     document.getElementById("conteudo-album").innerHTML = `
+        ${previa ? '<p class="aviso-previa">Prévia do iTunes: adicione o álbum à sua biblioteca para guardá-lo.</p>' : ""}
         <header class="cabecalho-album-info">
             <img src="${escapar(capaUrl(album))}" alt="Capa ${escapar(album.titulo)}" width="200">
             <div class="textos-album">
@@ -79,19 +102,7 @@ function desenharAlbum(album) {
             <button type="button" class="btn-play-grande" id="btn-tocar-album" title="Tocar álbum" aria-label="Tocar álbum">
                 <span class="material-symbols-outlined play-grande" id="icone-play-album">play_circle</span>
             </button>
-            <button type="button" class="btn-icone btn-favorito ${album.favorito ? "ativo" : ""}" id="btn-favorito" title="Favoritar" aria-label="Favoritar álbum" aria-pressed="${album.favorito}">
-                <span class="material-symbols-outlined">favorite</span>
-            </button>
-            <div class="menu-album">
-                <button type="button" class="btn-icone" id="btn-mais" title="Mais opções" aria-label="Mais opções" aria-haspopup="true">
-                    <span class="material-symbols-outlined">more_horiz</span>
-                </button>
-                <ul class="menu-opcoes" id="menu-opcoes" hidden>
-                    <li><button type="button" data-acao="fila-album">Adicionar álbum à fila</button></li>
-                    <li><button type="button" data-acao="editar-album">Editar álbum</button></li>
-                    <li><button type="button" data-acao="excluir-album" class="perigo">Excluir álbum</button></li>
-                </ul>
-            </div>
+            ${previa ? htmlAcoesPrevia() : htmlAcoesBiblioteca(album)}
         </div>
 
         <table class="tabela-faixas">
@@ -172,7 +183,13 @@ function ligarEventos() {
         tocarLista(itensDoAlbum(albumAberto), posicao);
     });
 
-    document.getElementById("btn-favorito").addEventListener("click", (evento) => {
+    const botaoFavorito = document.getElementById("btn-favorito");
+    if (!botaoFavorito) {
+        document.getElementById("btn-adicionar-biblioteca").addEventListener("click", adicionarPreviaABiblioteca);
+        return;
+    }
+
+    botaoFavorito.addEventListener("click", (evento) => {
         const atualizado = alternarFavorito(albumAberto.id);
         const botao = evento.currentTarget;
         botao.classList.toggle("ativo", atualizado.favorito);
@@ -192,7 +209,46 @@ function ligarEventos() {
     });
 }
 
+/* ---------- Prévia de álbum do iTunes (pages/album.html?itunes=ID) ---------- */
+
+async function adicionarPreviaABiblioteca(evento) {
+    const botao = evento.currentTarget;
+    botao.disabled = true;
+    botao.textContent = "Adicionando...";
+
+    const salvo = adicionarAlbum(albumAberto);
+    sessionStorage.setItem("louvre:aviso", `Álbum "${salvo.titulo}" adicionado à biblioteca.`);
+    location.replace(urlAlbum(salvo));
+}
+
+async function abrirPreviaItunes(idItunes) {
+    const principal = document.getElementById("conteudo-album");
+
+    // se o álbum já foi importado, mostra a versão da biblioteca
+    const salvo = buscarAlbum(`itunes-${idItunes}`);
+    if (salvo) {
+        location.replace(urlAlbum(salvo));
+        return;
+    }
+
+    principal.innerHTML = '<p class="vazio">Buscando álbum no iTunes...</p>';
+    try {
+        desenharAlbum(completarFaixas(await buscarAlbumCompletoNoItunes(idItunes)), true);
+    } catch (erro) {
+        console.error("Falha ao buscar o álbum no iTunes:", erro);
+        principal.innerHTML = `
+            <h2>Não foi possível carregar o álbum</h2>
+            <p class="vazio">Verifique sua conexão e <a href="">tente novamente</a>, ou volte para a <a href="${caminho("index.html")}">Home</a>.</p>`;
+    }
+}
+
 function iniciarPaginaAlbum() {
+    const idItunes = new URLSearchParams(location.search).get("itunes");
+    if (idItunes) {
+        abrirPreviaItunes(idItunes);
+        return;
+    }
+
     const id = idAlbumDaPagina();
     const album = id ? buscarAlbum(id) : null;
 
