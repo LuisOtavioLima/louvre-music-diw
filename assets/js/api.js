@@ -61,6 +61,7 @@ async function buscarAlbumCompletoNoItunes(idItunes) {
             titulo: item.trackName,
             artistas: item.artistName,
             duracao: Math.round((item.trackTimeMillis || 0) / 1000) || undefined,
+            preview: item.previewUrl || null, // trecho de 30 s para ouvir
         }));
 
     return album;
@@ -76,4 +77,35 @@ async function importarAlbumDoItunes(idItunes) {
     const album = await buscarAlbumCompletoNoItunes(idItunes);
     if (albumItunesJaImportado(album)) return buscarAlbum(album.id);
     return adicionarAlbum(album);
+}
+
+/* ---------- Trechos de áudio (previewUrl) ---------- */
+
+// Deixa só letras e números, sem acento e sem o que está entre parênteses:
+// "Have a Baby (With Me)" -> "have a baby"
+function simplificarTitulo(titulo) {
+    return normalizar(titulo.replace(/\(.*?\)|\[.*?\]/g, " "))
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim();
+}
+
+// Procura no iTunes o trecho de áudio de uma faixa que não veio da API
+// (as faixas dos álbuns iniciais e as cadastradas à mão). Devolve o link ou null.
+async function buscarPreviewNoItunes(faixa) {
+    const artista = faixa.artistas.split(",")[0].trim();
+    const url = `${URL_ITUNES}/search?term=${encodeURIComponent(`${artista} ${faixa.titulo}`)}&entity=song&media=music&limit=15&country=BR`;
+    const dados = await buscarJson(url);
+
+    const titulo = simplificarTitulo(faixa.titulo);
+    const doArtista = dados.results.filter(
+        (item) => item.previewUrl && item.trackName && normalizar(item.artistName).includes(normalizar(artista))
+    );
+
+    // 1º: mesmo título. Entre os iguais, prefere o do mesmo álbum (evita single, ao vivo, remix...)
+    const iguais = doArtista.filter((item) => simplificarTitulo(item.trackName) === titulo);
+    const escolhida =
+        iguais.find((item) => simplificarTitulo(item.collectionName || "") === simplificarTitulo(faixa.albumTitulo || "")) ||
+        iguais[0];
+
+    return escolhida ? escolhida.previewUrl : null;
 }

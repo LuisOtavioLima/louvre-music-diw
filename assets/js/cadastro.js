@@ -83,6 +83,7 @@ function aproveitarFaixasAntigas(faixasNovas, albumAntigo) {
             ...nova,
             id: antiga.id,
             reproducoes: antiga.reproducoes,
+            preview: antiga.preview,
             duracao: nova.duracao || antiga.duracao,
         };
     });

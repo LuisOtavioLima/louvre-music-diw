@@ -13,6 +13,7 @@
 const CHAVE_ALBUNS = "louvre:albuns";
 const CHAVE_PERFIL = "louvre:perfil";
 const CHAVE_HISTORICO = "louvre:historico";
+const CHAVE_PREVIEWS = "louvre:previews";
 const DURACAO_PADRAO = 180; // 3:00, usada quando a faixa não informa a duração
 
 // Álbuns que já vêm no sistema na primeira visita
@@ -112,6 +113,7 @@ function completarFaixas(album) {
             artistas: faixa.artistas || album.artista,
             duracao: faixa.duracao || DURACAO_PADRAO,
             reproducoes: faixa.reproducoes ?? null,
+            preview: faixa.preview || null, // link do trecho de áudio (só faixas vindas do iTunes)
         };
     });
     return album;
@@ -189,7 +191,7 @@ function registrarReproducao(albumId, faixaId) {
 
 // Apaga tudo e volta aos álbuns iniciais
 function restaurarDadosIniciais() {
-    [CHAVE_ALBUNS, CHAVE_HISTORICO, "louvre:player"].forEach((chave) => localStorage.removeItem(chave));
+    [CHAVE_ALBUNS, CHAVE_HISTORICO, CHAVE_PREVIEWS, "louvre:player"].forEach((chave) => localStorage.removeItem(chave));
     carregarAlbuns();
 }
 
@@ -345,4 +347,23 @@ function registrarHistorico(faixa) {
     const historico = carregarHistorico().filter((item) => item.faixaId !== faixa.faixaId);
     historico.unshift({ ...faixa, tocadaEm: Date.now() });
     salvarStorage(CHAVE_HISTORICO, historico.slice(0, 20));
+}
+
+/* ---------- Cache dos trechos de áudio encontrados no iTunes ---------- */
+
+// A chave inclui o título: se a faixa for renomeada, o trecho antigo deixa de valer
+function chavePreview(faixa) {
+    return `${faixa.faixaId}|${normalizar(faixa.titulo)}`;
+}
+
+// undefined = nunca procurou | "" = procurou e não achou | link = achou
+function lerPreviewSalvo(faixa) {
+    return lerStorage(CHAVE_PREVIEWS, {})[chavePreview(faixa)];
+}
+
+function salvarPreview(faixa, link) {
+    const previews = lerStorage(CHAVE_PREVIEWS, {});
+    if (link === undefined) delete previews[chavePreview(faixa)];
+    else previews[chavePreview(faixa)] = link;
+    salvarStorage(CHAVE_PREVIEWS, previews);
 }
