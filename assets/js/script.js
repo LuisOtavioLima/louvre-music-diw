@@ -77,6 +77,14 @@ async function iniciarLayout() {
 
     iniciarSidebar();
     iniciarBiblioteca();
+    iniciarPlayer();
+
+    // Aviso deixado por outra página antes de redirecionar (ex.: álbum excluído)
+    const aviso = sessionStorage.getItem("louvre:aviso");
+    if (aviso) {
+        sessionStorage.removeItem("louvre:aviso");
+        mostrarToast(aviso);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", iniciarLayout);

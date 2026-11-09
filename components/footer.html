@@ -1,22 +1,48 @@
 <footer class="rodape">
-        <article class="tocando-agora">
-            <img src="assets/img/capa-son-of-spergy.jpg" alt="Capa Son of Spergy">
-            <div class="info-item">
-                <p class="titulo">Son Of Spergy</p>
-                <p class="detalhes">Álbum • Daniel Caesar</p>
-            </div>
-        </article>
+    <!-- Faixa que está tocando (nome da MÚSICA, não do álbum) -->
+    <article class="tocando-agora">
+        <a href="index.html" id="player-link" title="Abrir álbum">
+            <img id="player-capa" src="" alt="" hidden>
+        </a>
+        <div class="info-item">
+            <p class="titulo" id="player-titulo">Nada tocando</p>
+            <p class="detalhes" id="player-artista">Escolha uma música</p>
+        </div>
+    </article>
 
+    <div class="player-centro">
         <div class="player">
-            <span class="material-symbols-outlined">skip_previous</span>
-            <span class="material-symbols-outlined play-btn">play_circle</span>
-            <span class="material-symbols-outlined">skip_next</span>
+            <button type="button" class="btn-player" id="btn-anterior" title="Anterior" aria-label="Faixa anterior"><span class="material-symbols-outlined">skip_previous</span></button>
+            <button type="button" class="btn-player" id="btn-play" title="Tocar" aria-label="Tocar ou pausar"><span class="material-symbols-outlined play-btn" id="icone-play">play_circle</span></button>
+            <button type="button" class="btn-player" id="btn-proxima" title="Próxima" aria-label="Próxima faixa"><span class="material-symbols-outlined">skip_next</span></button>
         </div>
 
-        <div class="controles">
-            <span class="material-symbols-outlined">menu</span>
-            <span class="material-symbols-outlined">volume_up</span>
+        <div class="barra-progresso">
+            <span id="player-tempo-atual">0:00</span>
+            <label for="player-progresso" class="sr-only">Progresso da faixa</label>
+            <input type="range" id="player-progresso" min="0" max="0" value="0" step="1">
+            <span id="player-tempo-total">0:00</span>
+        </div>
+    </div>
+
+    <div class="controles">
+        <button type="button" class="btn-player" id="btn-fila" title="Fila de reprodução" aria-label="Abrir a fila de reprodução">
+            <span class="material-symbols-outlined">queue_music</span>
+            <span class="selo-fila" id="selo-fila" hidden>0</span>
+        </button>
+        <div class="volume-grupo">
+            <button type="button" class="btn-player" id="btn-mudo" title="Silenciar" aria-label="Silenciar"><span class="material-symbols-outlined" id="icone-volume">volume_up</span></button>
             <label for="volume" class="sr-only">Volume</label>
             <input type="range" id="volume" name="volume" min="0" max="100" value="50">
         </div>
+    </div>
+
+    <!-- Fila de reprodução (modal) -->
+    <dialog id="modal-fila" class="modal modal-fila" aria-labelledby="titulo-fila">
+        <div class="cabecalho-modal">
+            <h3 id="titulo-fila">Fila de reprodução</h3>
+            <button type="button" class="btn-icone" id="btn-fechar-fila" title="Fechar" aria-label="Fechar a fila"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div id="conteudo-fila"></div>
+    </dialog>
 </footer>
