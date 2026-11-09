@@ -1,0 +1,128 @@
+/* ==========================================================================
+   cadastro.css — página "Gerenciar Álbuns" (formulário, lista e importação do iTunes)
+   ========================================================================== */
+
+.area-cadastro {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.area-cadastro h3 {
+    margin-bottom: 16px;
+}
+
+.painel-formularios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 32px;
+    align-items: start;
+}
+
+.contador {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.controles-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.controle-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-secundario);
+}
+
+.controle-select select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+}
+
+.lista-gerenciamento {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-gerenciamento li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #1e1e1e;
+}
+
+.lista-gerenciamento li.em-edicao {
+    outline: 1px solid var(--cor-destaque);
+}
+
+.lista-gerenciamento li.vazio {
+    background: none;
+}
+
+.lista-gerenciamento img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.lista-gerenciamento .info-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.lista-gerenciamento .info-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lista-gerenciamento .acoes {
+    display: flex;
+    gap: 4px;
+}
+
+.painel-itunes {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #282828;
+}
+
+.painel-itunes .dica-campo {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.busca-itunes {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.busca-itunes .busca-biblio-container {
+    flex: 1;
+}
+
+.lista-gerenciamento .btn-secundario:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+@media (max-width: 768px) {
+    .painel-formularios {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,50 @@
+/* ==========================================================================
+   layout.css — estrutura da página (Grid principal, barras e miolo)
+   ========================================================================== */
+
+body {
+    height: 100vh;
+    overflow: hidden; /* Evita a barra de rolagem dupla */
+    
+    /* CUMPRE O REQUISITO: CSS GRID NO LAYOUT PRINCIPAL */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* a coluna nunca passa da largura da tela */
+    grid-template-rows: 70px minmax(0, 1fr) 90px; /* Header | Meio | Footer (minmax(0) deixa o meio rolar por dentro) */
+}
+
+/* Faz as divs de placeholder "desaparecerem" estruturalmente para o Grid e Flexbox funcionarem */
+#header-placeholder, 
+#sidebar-placeholder, 
+#footer-placeholder {
+    display: contents;
+}
+
+/* Header e footer: barras pretas com Flexbox */
+.cabecalho, .rodape {
+    background-color: var(--bg-header-footer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+/* Miolo da página (sidebar + conteúdo) */
+.container-principal {
+    display: flex;
+    min-height: 0;      /* permite que o miolo encolha e role por dentro */
+    overflow: hidden;
+}
+
+/* Áreas de conteúdo principal */
+.sugestoes-louvre,
+.detalhes-album {
+    flex: 1;
+    background-color: var(--bg-principal);
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* A página de cadastro rola por dentro do miolo */
+.layout-centralizado {
+    overflow-y: auto;
+}

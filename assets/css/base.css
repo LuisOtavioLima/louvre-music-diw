@@ -1,0 +1,60 @@
+/* ==========================================================================
+   base.css — variáveis, reset e estilos gerais
+   ========================================================================== */
+
+:root {
+    --bg-header-footer: #000000;   /* Preto absoluto */
+    --bg-biblioteca: #121212;      /* Cinza escuro */
+    --bg-principal: #181818;       /* Cinza menos escuro */
+    
+    --texto-primario: #ffffff;
+    --texto-secundario: #b3b3b3;
+    --cor-destaque: #1db954;       /* Verde subtil para hover/play */
+    --cor-perigo: #ff4d4d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Cumpre o requisito "Box Model" */
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--bg-principal);
+    color: var(--texto-primario);
+}
+
+/* Ocultar visualmente labels por acessibilidade */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--cor-destaque);
+}
+
+/* Mensagem de lista vazia */
+.vazio {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    padding: 8px;
+}
+
+.vazio a {
+    color: var(--cor-destaque);
+    text-decoration: underline;
+}

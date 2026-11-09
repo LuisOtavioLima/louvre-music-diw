@@ -1,0 +1,57 @@
+/* ==========================================================================
+   home.css — Home: sugestões e cards de álbum
+   ========================================================================== */
+
+.sugestoes-louvre h2 {
+    margin-bottom: 24px;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.card-album {
+    background-color: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.card-album:hover {
+    background-color: #282828;
+}
+
+.card-album img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.card-album h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-album p {
+    font-size: 14px;
+    color: var(--texto-secundario);
+}
+
+/* Cards: o link ocupa o card todo */
+.card-album a {
+    display: block;
+}
+
+.card-album a:hover {
+    color: inherit;
+}
+
+.sugestoes-louvre .vazio {
+    grid-column: 1 / -1;
+}
