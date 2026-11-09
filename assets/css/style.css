@@ -535,3 +535,237 @@ body[data-layout="sem-sidebar"] .barra-busca {
 .sugestoes-louvre .vazio {
     grid-column: 1 / -1;
 }
+
+/* ========================================================
+   Cadastro: formulário, lista e controles
+   ======================================================== */
+
+/* A página de cadastro rola por dentro do miolo */
+.layout-centralizado {
+    overflow-y: auto;
+}
+
+.area-cadastro {
+    padding: 24px;
+}
+
+.area-cadastro h3 {
+    margin-bottom: 16px;
+}
+
+.painel-formularios {
+    align-items: start;
+}
+
+.grupo-input textarea,
+.controle-select select {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--texto-primario);
+    background-color: #242424;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.grupo-input textarea {
+    padding: 12px;
+    resize: vertical;
+}
+
+.grupo-input textarea:focus,
+.controle-select select:focus {
+    border-color: var(--cor-destaque);
+    outline: none;
+}
+
+.grupo-input input.invalido,
+.grupo-input textarea.invalido {
+    border-color: var(--cor-perigo);
+}
+
+.erro-campo {
+    color: var(--cor-perigo);
+    font-size: 12px;
+}
+
+.erro-campo:empty {
+    display: none;
+}
+
+.dica-campo {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.dica-campo code {
+    color: var(--texto-primario);
+}
+
+.linha-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.grupo-acoes-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.btn-perigo {
+    background-color: var(--cor-perigo);
+    color: #fff;
+}
+
+.btn-icone {
+    background: transparent;
+    color: var(--texto-secundario);
+}
+
+.btn-icone:hover {
+    background-color: #333;
+    color: var(--texto-primario);
+}
+
+.btn-icone.perigo:hover {
+    color: var(--cor-perigo);
+}
+
+.contador {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.controles-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.controle-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-secundario);
+}
+
+.controle-select select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+}
+
+.lista-gerenciamento {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-gerenciamento li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #1e1e1e;
+}
+
+.lista-gerenciamento li.em-edicao {
+    outline: 1px solid var(--cor-destaque);
+}
+
+.lista-gerenciamento li.vazio {
+    background: none;
+}
+
+.lista-gerenciamento img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.lista-gerenciamento .info-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.lista-gerenciamento .info-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lista-gerenciamento .acoes {
+    display: flex;
+    gap: 4px;
+}
+
+/* ========================================================
+   Avisos (toast) e janelas (modal)
+   ======================================================== */
+
+#area-toasts {
+    position: fixed;
+    right: 24px;
+    bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+}
+
+.toast {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #282828;
+    border-left: 4px solid var(--cor-destaque);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    animation: toast-entrada 0.2s ease;
+}
+
+.toast-erro {
+    border-left-color: var(--cor-perigo);
+}
+
+@keyframes toast-entrada {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+.modal {
+    background-color: #282828;
+    color: var(--texto-primario);
+    border: none;
+    border-radius: 8px;
+    padding: 24px;
+    margin: auto;
+    font-family: inherit;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-confirmacao {
+    width: min(420px, 90vw);
+}
+
+.modal-confirmacao p {
+    color: var(--texto-secundario);
+    margin: 12px 0 20px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .linha-dupla {
+        grid-template-columns: 1fr;
+    }
+}

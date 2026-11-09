@@ -94,13 +94,26 @@ function gerarId() {
 
 // Garante que toda faixa tenha id, artistas, duração e reproduções.
 function completarFaixas(album) {
-    album.faixas = (album.faixas || []).map((faixa, posicao) => ({
-        id: faixa.id || `${album.id}-${posicao + 1}`,
-        titulo: faixa.titulo,
-        artistas: faixa.artistas || album.artista,
-        duracao: faixa.duracao || DURACAO_PADRAO,
-        reproducoes: faixa.reproducoes ?? null,
-    }));
+    const faixas = album.faixas || [];
+    const usados = new Set(faixas.map((faixa) => faixa.id).filter(Boolean));
+    let proximo = 1;
+
+    album.faixas = faixas.map((faixa) => {
+        let id = faixa.id;
+        if (!id) {
+            // procura um número de id ainda não usado neste álbum
+            while (usados.has(`${album.id}-${proximo}`)) proximo++;
+            id = `${album.id}-${proximo}`;
+            usados.add(id);
+        }
+        return {
+            id,
+            titulo: faixa.titulo,
+            artistas: faixa.artistas || album.artista,
+            duracao: faixa.duracao || DURACAO_PADRAO,
+            reproducoes: faixa.reproducoes ?? null,
+        };
+    });
     return album;
 }
 
