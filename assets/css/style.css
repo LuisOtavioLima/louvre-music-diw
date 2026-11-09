@@ -454,3 +454,24 @@ a:hover {
     display: contents;
 }
 
+
+/* Botão de recolher a biblioteca (ícone no header) */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-menu {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+}
+
+/* Páginas sem biblioteca (ex.: cadastro): não mostram o botão de recolher nem a busca */
+body[data-layout="sem-sidebar"] .btn-menu,
+body[data-layout="sem-sidebar"] .barra-busca {
+    display: none;
+}
